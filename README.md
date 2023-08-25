@@ -15,7 +15,7 @@ Course Staff
 
 Office Hours (tentative)
 ---
-- Monday: 3PM - 5PM w/ Kaley
+- Monday: 10AM - 12PM w/ Kaley
 - Tuesday: 12PM-2PM w/ Kaley, 3PM - 5PM w/ Charlie  
 - Wednesday: 12PM - 2PM w/ Kaley
 - Thursday: 10AM - 12PM w/ Kaley  
