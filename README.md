@@ -16,9 +16,10 @@ Course Staff
 Office Hours (tentative)
 ---
 - Monday: 10AM - 12PM w/ Kaley
-- Tuesday: 12PM-2PM w/ Kaley, 3PM - 5PM w/ Charlie  
-- Wednesday: 12PM - 2PM w/ Kaley
-- Thursday: 10AM - 12PM w/ Kaley  
+- Tuesday: 10AM-12:30PM w/Akim, 12PM-2PM w/ Kaley, 3PM - 5PM w/ Charlie  
+- Wednesday: 10AM-12:30PM w/ Akim, 12PM - 2PM w/ Kaley
+- Thursday: 10AM - 12PM w/ Kaley
+- Friday: 10AM-12:30PM w/ Akim
 
 I will spend time on Discord answering questions asynchronously. Whenever possible, please post questions *publicly* in Discord so everyone can learn from the answers... and there's a good chance someone else in the class might be able to help with technical questions as well. My in-person office hours are from 3--5 on Tuesday, in Fuller Labs B30... please stop by! Some good reasons to stop by in-person office hours include:
 
