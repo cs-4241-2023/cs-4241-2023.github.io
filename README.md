@@ -10,14 +10,14 @@ Note that Monday September 4th is a holiday (Labor Day); no class will be held.
 Course Staff
 ---
 *Instructor*: Charlie Roberts (@cdroberts)  
-*TA*: Akim Nvodlu (@andlovu)  
+*TA*: Akim Ndlovu (@andlovu)  
 *SA*: Kaley Du (@kdu)  
 
 Office Hours (tentative)
 ---
 - Monday: 10AM - 12PM w/ Kaley
-- Tuesday: 10AM-12:30PM w/Akim, 12PM-2PM w/ Kaley, 3PM - 5PM w/ Charlie  
-- Wednesday: 10AM-12:30PM w/ Akim, 12PM - 2PM w/ Kaley
+- Tuesday: 09:30AM-12:00PM w/Akim, 12PM-2PM w/ Kaley, 3PM - 5PM w/ Charlie  
+- Wednesday: 09:30AM-12:00PM w/ Akim, 12PM - 2PM w/ Kaley
 - Thursday: 10AM - 12PM w/ Kaley
 - Friday: 10AM-12:30PM w/ Akim
 
