@@ -5,7 +5,7 @@ Readings:
 - [You Don't Know JS: Get Started](https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/get-started/ch1.md), chapter 1 (due 08-28)  
 - [Responsive Web Design with HTML5 and CSS](https://learning.oreilly.com/library/view/responsive-web-design/9781803242712/) chapters 1,2, and 3 (due 08-31)  
 
-*08-31*
+*08-31*  
 Topic: Client / Server Communication  
 Development Assignment: [A2](https://github.com/cs-4241-2023/shortstack/blob/main/README.md) (due 9/11)  
 Readings:  
