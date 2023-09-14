@@ -115,11 +115,14 @@ app.use( (req,res,next) => {
 ### Add a route to insert a todo
 
 ```js
-app.post( '/add', (req,res) => {
-  // assumes only one object to insert
-  collection.insertOne( req.body ).then( result => res.json( result ) )
+app.post( '/add', async (req,res) => {
+  const result = await collection.insertOne( req.body )
+  res.json( result )
 })
 ```
+
+Note that the value returned from this includes a unique ID we can use to reference
+the newly added object in the database. We'll use that to remove an object below.
 
 ### Add a route to remove a todo
 All documents get a unique id, we'll use that as the key to remove a particular document. However, we
@@ -129,10 +132,12 @@ particular documents for removal that match specified conditions.
 
 ```js
 // assumes req.body takes form { _id:5d91fb30f3f81b282d7be0dd } etc.
-app.post( '/remove', (req,res) => {
-  collection
-    .deleteOne({ _id:mongodb.ObjectId( req.body._id ) })
-    .then( result => res.json( result ) )
+app.post( '/remove', async (req,res) => {
+  const result = await collection.deleteOne({ 
+    _id:MongoClient.ObjectId( req.body._id ) 
+  })
+  
+  res.json( result )
 })
 ```
 
@@ -140,12 +145,12 @@ app.post( '/remove', (req,res) => {
 We can use the [update operators](http://mongodb.github.io/node-mongodb-native/3.3/api/Collection.html) to apply a variety of transformations to a document:
 
 ```js
-app.post( '/update', (req,res) => {
-  collection
-    .updateOne(
-      { _id:mongodb.ObjectId( req.body._id ) },
-      { $set:{ name:req.body.name } }
-    )
-    .then( result => res.json( result ) )
+app.post( '/update', async (req,res) => {
+  const result = await collection.updateOne(
+    { _id:mongodb.ObjectId( req.body._id ) },
+    { $set:{ name:req.body.name } }
+  )
+
+  res.json( result )
 })
 ```
