@@ -27,23 +27,31 @@
   - After you create your account, you need to complete five steps before accessing your database from Node:
     1. Define a cluster
     2. Define account(s) to access your cluster
-    3. Define which IP addresses can access your cluster (whitelist)
-    4. Make a database
-    5. Get the correct URL to access your database
+       - `Security > Database Access`
+    4. Define which IP addresses can access your cluster (whitelist)
+      - use `0.0.0.0/0` to whitelist all connections, which is fine for this assignment
+      - if you have a static IP address for your Node.js server, you would normally want to enter that here
+    5. Make a database
+      - `Deployment > Database > Create`
+    6. Get the correct URL to access your database
       - We'll need to store this URL along with authentication in a `.env` file in Glitch
+      - You can find the connection information at `Database > Collections > Cmd Line Tools > Connect To Your Cluster` 
     6. (optional) We can also initialize our data using the Atlas web API
+
+You can also do steps 1-4 from the Project Quickstart when you first create your Atlas account and a new project.
     
 ## Using the MongoDB core driver
   - There are two main ways to use MongoDB:
     1. [The MongoDB Node.js driver](https://github.com/mongodb/node-mongodb-native)
     2. [Mongoose](https://mongoosejs.com)
   - Mongoose provides schemas / validation, while MongoDB is more flexible (no schema required). We'll use the MongoDB node.js driver for this example.
-  - In Glitch, create a simple `.env` file to hold your authentication data:
+  - In Glitch, create a simple `.env` file to hold your authentication data. *MAKE SURE TO PUT THE HOST VALUE IN QUOTATION MARKS*:
 ```
 USER=xxxxx
 PASS=xxxxx
 HOST="cluster0-xxxxxxxx.mongodb.net"
 ```
+
   You can also use the [dotenv library](https://www.npmjs.com/package/dotenv) if you're doing local development / not using Glitch.
   - You can get all of the above information by going to Atlas > Clusters > Connect > Connect Your Application
   - Take a look at the [Collection API](http://mongodb.github.io/node-mongodb-native/3.3/api/Collection.html) to get
@@ -64,40 +72,34 @@ of your package.json file (in which case there is more information to come), oth
 Make sure to replace `XXXtest` and `XXXtodos` with the name of your database and collection respectively.
 
 ```js
-const express = require( 'express' ),
-      mongodb = require( 'mongodb' ),
+const express = require("express"),
+      { MongoClient } = require("mongodb"),
       app = express()
 
-app.use( express.static('public') )
-app.use( express.json() )
+app.use(express.static("public") )
+app.use(express.json() )
 
-const uri = 'mongodb+srv://'+process.env.USER+':'+process.env.PASS+'@'+process.env.HOST
+const uri = `mongodb+srv://${process.env.USER}:${process.env.PASS}@${process.env.HOST}`
+const client = new MongoClient( uri )
 
-const client = new mongodb.MongoClient( uri, { useNewUrlParser: true, useUnifiedTopology:true })
 let collection = null
 
-client.connect()
-  .then( () => {
-    // will only create collection if it doesn't exist
-    return client.db( 'XXXtest' ).collection( 'XXXtodos' )
+async function run() {
+  await client.connect()
+  collection = await client.db("datatest").collection("test")
+
+  // route to get all docs
+  app.get("/docs", async (req, res) => {
+    if (collection !== null) {
+      const docs = await collection.find({}).toArray()
+      res.json( docs )
+    }
   })
-  .then( __collection => {
-    // store reference to collection
-    collection = __collection
-    // blank query returns all documents
-    return collection.find({ }).toArray()
-  })
-  .then( console.log )
-  
-// route to get all docs
-app.get( '/', (req,res) => {
-  if( collection !== null ) {
-    // get array and pass to res.json
-    collection.find({ }).toArray().then( result => res.json( result ) )
-  }
-})
-  
-app.listen( 3000 )
+}
+
+run()
+
+app.listen(3000)
 ```
 
 ### Add middleware to check connection
