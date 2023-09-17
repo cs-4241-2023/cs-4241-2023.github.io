@@ -73,7 +73,7 @@ Make sure to replace `XXXtest` and `XXXtodos` with the name of your database and
 
 ```js
 const express = require("express"),
-      { MongoClient } = require("mongodb"),
+      { MongoClient, ObjectId } = require("mongodb"),
       app = express()
 
 app.use(express.static("public") )
@@ -134,7 +134,7 @@ particular documents for removal that match specified conditions.
 // assumes req.body takes form { _id:5d91fb30f3f81b282d7be0dd } etc.
 app.post( '/remove', async (req,res) => {
   const result = await collection.deleteOne({ 
-    _id:MongoClient.ObjectId( req.body._id ) 
+    _id:new ObjectId( req.body._id ) 
   })
   
   res.json( result )
@@ -147,7 +147,7 @@ We can use the [update operators](http://mongodb.github.io/node-mongodb-native/3
 ```js
 app.post( '/update', async (req,res) => {
   const result = await collection.updateOne(
-    { _id:mongodb.ObjectId( req.body._id ) },
+    { _id: new ObjectId( req.body._id ) },
     { $set:{ name:req.body.name } }
   )
 
