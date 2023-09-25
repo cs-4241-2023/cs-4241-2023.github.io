@@ -6,9 +6,10 @@ handle most of the static routes for us, so that we can solely focus on routes f
 server.
 
 ```js
-const express     = require( 'express' ),
-      app         = express(),
-      ViteExpress = require( 'vite-express' )
+import express from  'express'
+import ViteExpress from 'vite-express'
+
+const app = express()
 
 const todos = [
   { name:'buy groceries', completed:false }
@@ -30,7 +31,6 @@ app.post( '/change', function( req,res ) {
   res.sendStatus( 200 )
 })
 
-// substitute for app.listen
 ViteExpress.listen( app, 3000 )
 ```
 
