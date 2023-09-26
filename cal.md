@@ -31,3 +31,9 @@ Readings:
   
 Watch:  
 - [Aria, Accessibility APIs, and coding like you give a damn!](https://www.youtube.com/watch?v=qdB8SRhqvFc) (due 9-18)
+
+*9-25*  
+Topics: Reactive Programming and Realtime Communications  
+Development Assignment: Pick one between [A4 Creative Coding](https://github.com/cs-4241-2023/a4-creative-coding) and [A4 Components](https://github.com/cs-4241-2023/a4-components) (due 10/2)  
+
+CONTINUE WORKING ON YOUR FINAL PROJECTS
