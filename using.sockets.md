@@ -122,7 +122,7 @@ mouse position whenever the window is clicked. We’ll then add code to take any
         ws.onopen = () => {
           ws.onmessage = async msg => {
             const pos = await msg.data.text()
-            const [x,y] = pos.split( ':' ).map( parseInt )
+            const [x,y] = pos.split( ':' ).map( v => parseInt(v) )
 
             ctx.fillStyle = 'red'
             ctx.fillRect( x,y,50,50 )
