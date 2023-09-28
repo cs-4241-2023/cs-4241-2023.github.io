@@ -107,12 +107,12 @@ mouse position whenever the window is clicked. We’ll then add code to take any
 ```html
 <html lang="en">
   <head>
-    <style> 
-		body { 
-			margin:0; 
-			background:black 
-		} 
-	  </style>
+    <style>
+      body { 
+        margin:0; 
+        background:black 
+      } 
+    </style>
     <script>
       let ws, msgs = [], ctx = null
       
