@@ -31,7 +31,7 @@ when run yields:
 >    at test (<anonymous>:9:36)
 >    at <anonymous>:1:1
   
-Our reading argued that you should use `var` to indicate variables that are deliberately scoped to entire functions, even though a top-level `let` variable has the same scope. I think this advice is overthinking it.
+One of our readings argued that you should use `var` to indicate variables that are deliberately scoped to entire functions, even though a top-level `let` variable has the same scope. I think this advice is overthinking it.
 
 ## Two ways to define functions
 
@@ -69,6 +69,71 @@ fetch('/readArray')
       .filter( function(v) { return v < 10 } ) 
   })
   .then( console.log )
+```
+
+Arrow functions also have "lexical scope" which we'll discuss later in this review.
+
+## Promises vs Async / Await
+The `fetch` examples above use JavaScript Promises, which are a way to make asynchronous coding easier
+to read / write. Below is an example of creating a new Promise, which resolves after one second. When a promise resolves it then calls any functions passed to its `.then()` method. It might be easiest to think of `.then()` as being an easy way to define callbacks for when a promise resolves.
+
+```js
+p = new Promise( (resolve,reject) => {
+  setTimeout( resolve, 1000 )
+})
+.then( ()=> console.log('yo') )
+```
+
+But the `.then()` syntax is still a bit strange. Eventually browsers added the ability to `await` resolving a project. Now we can do this (at least in our browser's development console):
+
+```js
+await new Promise( (resolve,reject) => {
+  setTimeout( resolve, 1000 )
+})
+
+console.log('yo')
+```
+
+Here we "await" a promise to finish, and then move to the next line of code. Promises can also pass data when they call the resolve function... if you use a Promise in conjunction with `await` the data passed to resolve will be returned by the promise.
+
+```js
+const text = await new Promise( (resolve,reject) => {
+  setTimeout( ()=> resolve( 'TESTING' ), 1000 )
+})
+
+console.log( text )
+```
+By using the `await` keyword and capturing values returned by Promises, we can change our `fetch` example to:
+
+```js
+const response = await fetch('/readArray')
+const json  = await response.json()
+const array = json.map( v => v*2 ).filter( v => v < 10 )
+console.log( array )
+```
+
+While these examples will work in the browser's console or in the top level of ES Modules, you can only use them in "regular" JavaScript (JavaScript imported via a `<script>` tag that does not contain the `type="module"` attribute) if you add the `async` declaration to a function definition.
+
+```js
+// won't work
+const fail = function() {
+  const text = await new Promise( (resolve,reject) => {
+    setTimeout( ()=> resolve( 'TESTING' ), 1000 )
+  })
+
+  return text
+}
+console.log( await fail() )
+
+// will work
+const succeed = async function() {
+  const text = await new Promise( (resolve,reject) => {
+    setTimeout( ()=> resolve( 'TESTING' ), 1000 )
+  })
+
+  return text
+}
+console.log( await succeed() )
 ```
 
 ## Scope / Closures
@@ -223,4 +288,4 @@ const Login = function() {
 export default Login
 ```
 
-You can then use systems like Vite/Snowpack/Webpack to link them all together. See the [class notes on modules](https://github.com/cs4241-22a/cs4241-22a.github.io/blob/main/using_modules.md) for more info.
+You can then use systems like Vite/Snowpack/Webpack to link them all together. See the [class notes on modules](https://github.com/cs-4241-2023/cs-4241-2023.github.io/blob/main/using_modules.md) for more info.
