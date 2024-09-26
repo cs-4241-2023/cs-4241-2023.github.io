@@ -73,7 +73,7 @@ export function getPosts() {
     const fullPath = path.join( postsDirectory, fileName )
     const text = fs.readFileSync( fullPath, 'utf8' )
 
-    return { id,tex }
+    return { id,text }
   })
 
   return allPostsData
